@@ -1,0 +1,15 @@
+//이 파일은 모든 페이지들의 토대가 되는 파일이다
+//이 태그들을 매번 복붙하지 않으려고 레이아웃을 만들었다
+//수정할 때 다 바꿀 수는 없잖아요.. 
+//이걸 사용하는 방법? 해당 퍼그 파일로 가서 extension이라는 걸 한다
+//다음 설명은 home에서..
+doctype html
+html
+    head
+        script(src="https://kit.fontawesome.com/7c37759201.js", crossorigin="anonymous")
+        title Vloger
+    body
+        include ../partials/header.pug
+        main
+            block content
+        include ../partials/footer.pug
