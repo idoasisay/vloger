@@ -1,12 +1,24 @@
 //href에 /join처럼 적고 싶지 않다. 바뀐다면 하나씩 다 바꿔 줘야 되니까.
 //one single source of truth(한 곳에서만 정보를 보관).
-//더 나은 코드를 만들어 주는 원칙.
+//더 나은 코드를 만들어 주는 원칙. 버그도 쉽게 줄어든다.
 header.header
     .header__column
-        i.fas.fa-cookie-bite
+        a(href=routes.home)
+            i.fas.fa-cookie-bite
+    .header__column
+        form(action=routes.search, method="get")
+            input(type="text", placeholder="검색", name="term")
     .header__column
         ul
-            li
-                a(href="#") 회원가입
-            li
-                a(href="#") 로그인
+            if !user.isAuthenticated
+                li
+                    a(href=routes.join) 회원가입
+                li
+                    a(href=routes.login) 로그인
+            else
+                li
+                    a(href=`/videos${routes.upload}`) 업로드
+                li
+                    a(href=routes.userDetail(user.id)) 프로필
+                li
+                    a(href=routes.logout) 로그아웃

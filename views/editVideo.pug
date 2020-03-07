@@ -1,4 +1,9 @@
 extends layouts/main.pug
 
 block content
-    p hello!
+    .form-container
+        form(action=`/videos${routes.upload}`, method="post")
+            input(type="text", placeholder="영상 제목", name="title", required=true)
+            textarea(name="avatarVideo", cols="30", rows="2" placeholder="설명", required=true)
+            input(tyep="submit", value="업로드", required=true)
+        a.form-container__link.form-container__link--delete(href=`/videos${routes.deleteVideo}`) 영상 삭제하기

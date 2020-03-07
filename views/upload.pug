@@ -1,4 +1,10 @@
 extends layouts/main.pug
 
 block content
-    p hello!
+    .form-container
+        form(action=`/videos${routes.upload}`, method="post")
+            label(for="file") 영상 파일
+            input(type="file", id="file", name="file", required=true)
+            input(type="text", placeholder="영상 제목", name="title", required=true)
+            textarea(name="description", placeholder="설명", required=true)
+            input(type="submit", value="업로드")
