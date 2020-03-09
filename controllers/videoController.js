@@ -3,7 +3,7 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({ _id: -1 });
     res.render("home", { videos });
   } catch (error) {
     console.log(error);
@@ -11,11 +11,19 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // 구시대 방식 const searchingBy = req.query.term;
   const {
     query: { term: searchingBy }
   } = req;
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }
+    });
+  } catch (error) {
+    console.log(error);
+  }
   res.render("search", { pageTitle: "찾기 | ", searchingBy, videos });
 };
 
@@ -32,13 +40,59 @@ export const postUpload = async (req, res) => {
     title,
     description
   });
-  console.log(newVideo);
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
-export const videoDetail = (req, res) =>
-  res.render("videoDetail", { pageTitle: "영상 정보 | " });
-export const editVideo = (req, res) =>
-  res.render("editVideo", { pageTitle: "영상 수정하기 | " });
-export const deleteVideo = (req, res) =>
-  res.render("deleteVideo", { pageTitle: "영상 삭제하기 | " });
+export const videoDetail = async (req, res) => {
+  try {
+    const {
+      params: { id }
+    } = req;
+    const video = await Video.findById(id);
+    res.render("videoDetail", { pageTitle: `${video.title} | `, video });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+export const getEditVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    res.render("editVideo", {
+      pageTitle: `'${video.title}' 동영상 수정 | `,
+      video
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+
+export const postEditVideo = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description }
+  } = req;
+  try {
+    await Video.findOneAndUpdate({ _id: id }, { title, description });
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+
+export const deleteVideo = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    await Video.findOneAndRemove({ _id: id });
+  } catch (error) {
+    console.log(error);
+  }
+  res.redirect(routes.home);
+};
