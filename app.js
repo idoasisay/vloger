@@ -12,7 +12,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
-import { localMiddleWare } from "./middleWares";
+import { localMiddleWare, uploadVideoMiddleWare } from "./middleWares";
 
 //express 실행한 걸 변수 app에 담았음
 const app = express();
@@ -21,6 +21,7 @@ const app = express();
 app.use(helmet());
 //pug 세팅. pug는 express의 템플릿이다.
 app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
 //미들웨어를 추가함
 //쿠키를 전달받아서 사용할수 있도록 만들어줌
 app.use(cookieParser());

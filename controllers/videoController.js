@@ -1,8 +1,14 @@
-import { videos } from "../db";
 import routes from "../routes";
+import Video from "../models/Video";
 
-export const home = (req, res) => {
-  res.render("home", { videos });
+export const home = async (req, res) => {
+  try {
+    const videos = await Video.find({});
+    res.render("home", { videos });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { videos: [] });
+  }
 };
 
 export const search = (req, res) => {
@@ -15,12 +21,19 @@ export const search = (req, res) => {
 
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "업로드하기 | " });
-export const postUpload = (req, res) => {
+
+export const postUpload = async (req, res) => {
   const {
-    body: { file, title, description }
+    body: { title, description },
+    file: { path }
   } = req;
-  //업로드하고 비디오 저장
-  res.redirect(routes.videoDetail(332234342));
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    description
+  });
+  console.log(newVideo);
+  res.redirect(routes.videoDetail(newVideo.id));
 };
 
 export const videoDetail = (req, res) =>

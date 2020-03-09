@@ -1,54 +1,19 @@
-export const videos = [
-  {
-    id: 332234342,
-    title: "3월 2주 ~ 달고나 커피 만들기",
-    description: "굳이 400번을 저어서 먹어야 될 필요가 있을까요?",
-    views: 111111111,
-    videoFile:
-      "https://ia800300.us.archive.org/17/items/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-    creator: {
-      id: 12123312,
-      name: "hamzzi",
-      email: "ihannah@kakao"
-    }
-  },
-  {
-    id: 213412,
-    title: "달고나 존맛",
-    description: "굳이 400번을 저어서 먹어야 될 필요가 있을까요?",
-    views: 111111111,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-    creator: {
-      id: 12123312,
-      name: "hamzzi",
-      email: "ihannah@kakao"
-    }
-  },
-  {
-    id: 67582,
-    title: "아머예요",
-    description: "굳이 400번을 저어서 먹어야 될 필요가 있을까요?",
-    views: 111111111,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-    creator: {
-      id: 12123312,
-      name: "hamzzi",
-      email: "ihannah@kakao"
-    }
-  },
-  {
-    id: 65442,
-    title: "아니이걸?",
-    description: "굳이 400번을 저어서 먹어야 될 필요가 있을까요?",
-    views: 111111111,
-    videoFile:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-    creator: {
-      id: 12123312,
-      name: "hamzzi",
-      email: "ihannah@kakao"
-    }
-  }
-];
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+import "./models/Video";
+import "./models/Comment";
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("✅ Connected to DB");
+const handleError = error => console.log("⛔️Error on DB Connection:${error}");
+
+db.once("open", handleOpen);
+db.on("error", handleError);
