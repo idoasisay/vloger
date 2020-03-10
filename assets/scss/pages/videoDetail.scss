@@ -1,0 +1,36 @@
+.video-detail__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .video__info {
+    max-width: 850px;
+    width: 100%;
+    margin: 50px;
+    h5 {
+      font-size: 20px;
+      margin: 20px 0 10px;
+    }
+    span {
+      color: $lightgray;
+    }
+    hr {
+      border: 0.5px solid lightgray;
+      margin: 20px 0;
+    }
+  }
+  button {
+    border-radius: 3px;
+    background-color: $cookie;
+    color: white;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    outline: 0;
+  }
+}

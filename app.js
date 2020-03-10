@@ -22,6 +22,7 @@ app.use(helmet());
 //pug 세팅. pug는 express의 템플릿이다.
 app.set("view engine", "pug");
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 //미들웨어를 추가함
 //쿠키를 전달받아서 사용할수 있도록 만들어줌
 app.use(cookieParser());

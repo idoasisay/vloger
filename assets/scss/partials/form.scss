@@ -1,0 +1,62 @@
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    font-size: 1.5em;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 40px;
+    color: $gray;
+  }
+  a {
+    width: 100%;
+    max-width: 400px;
+    button {
+      width: 400px;
+      border-radius: 3px;
+      background-color: white;
+      color: $gray;
+    }
+    .form__delete-button {
+      margin-top: 30px;
+      background-color: $red;
+      color: white;
+    }
+  }
+  form {
+    margin: 25px;
+    width: 100%;
+    max-width: 400px;
+    input[type="submit"] {
+      font-weight: 600;
+    }
+    input[type="file"] {
+      margin-bottom: 10px;
+      outline: 0;
+      cursor: pointer;
+    }
+    input:not([type="file"]) {
+      border-radius: 3px;
+      border: 1px solid #e7e7e7;
+      width: 100%;
+      display: block;
+      padding: 10px;
+      outline: 0;
+      font-size: 1em;
+      &::placeholder {
+        font-weight: 300;
+        color: rgba(0, 0, 0, 0.7);
+      }
+      &:not(:last-child) {
+        margin-bottom: 25px;
+      }
+      &:last-child {
+        cursor: pointer;
+        background-color: $cookie;
+        color: white;
+      }
+    }
+  }
+}

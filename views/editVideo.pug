@@ -4,6 +4,7 @@ block content
     .form-container
         form(action=routes.editVideo(video.id), method="post")
             input(type="text", placeholder="영상 제목", name="title", required=true value=video.title)
-            textarea(name="description", cols="30", rows="2" placeholder="동영상 설명", required=true)=video.description
+            textarea(name="description", cols="30", rows="2", placeholder="동영상 설명", required=true)=video.description
             input(type="submit", value="업로드")
-        a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) 영상 삭제하기
+        a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id))
+            button.form__delete-button 영상 삭제하기

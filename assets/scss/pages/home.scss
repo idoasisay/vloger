@@ -1,0 +1,8 @@
+.home-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  .videoBlock:first-child,
+  .videoBlock:nth-child(2) {
+    grid-column: span 2;
+  }
+}

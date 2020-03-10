@@ -2,23 +2,29 @@
 //one single source of truth(한 곳에서만 정보를 보관).
 //더 나은 코드를 만들어 주는 원칙. 버그도 쉽게 줄어든다.
 header.header
-    .header__column
-        a(href=routes.home)
-            i.fas.fa-cookie-bite
-    .header__column
-        form(action=routes.search, method="get")
-            input(type="text", placeholder="검색", name="term")
-    .header__column
-        ul
-            if !user.isAuthenticated
-                li
-                    a(href=routes.join) 회원가입
-                li
-                    a(href=routes.login) 로그인
-            else
-                li
-                    a(href=`/videos${routes.upload}`) 업로드
-                li
-                    a(href=routes.userDetail(user.id)) 프로필
-                li
-                    a(href=routes.logout) 로그아웃
+    .header__wrapper
+        .header__column
+            a(href=routes.home)
+                i.fas.fa-cookie-bite
+                span Vloger
+        .header__column
+            form(action=routes.search, method="get")
+                input(type="text", placeholder="검색", name="term")
+                button(type="submit")
+                    <i class="fas fa-search"></i>
+        .header__column
+            ul
+                if !user.isAuthenticated
+                    li
+                        a(href=routes.join) 회원가입
+                    li
+                        a(href=routes.login) 로그인
+                else
+                    li
+                        a(href=`/videos${routes.upload}` aria-label="업로드")
+                            i.fas.fa-file-upload
+                    li
+                        a(href=routes.userDetail(user.id) aria-label="프로필")
+                            i.fas.fa-user-circle
+                    li
+                        a(href=routes.logout) 로그아웃

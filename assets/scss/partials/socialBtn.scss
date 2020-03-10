@@ -1,0 +1,25 @@
+.social-login {
+  button {
+    margin: 0 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    &:first-child {
+      background-color: $gray;
+      color: white;
+      i {
+        font-size: 20px;
+        padding-right: 10px;
+        color: white;
+      }
+    }
+    &:last-child {
+      color: $gray;
+      background-color: white;
+      i {
+        font-size: 20px;
+        padding-right: 10px;
+        color: $red;
+      }
+    }
+  }
+}
