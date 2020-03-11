@@ -15,6 +15,7 @@ const USER_DETAIL = "/:id";
 //익스프레스는 똑똑해서 이 값은 변하는 값이라는 것을 알아챔 : <=여거
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 //Video
 const VIDEOS = "/videos";
@@ -22,6 +23,10 @@ const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
+
+// Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
 
 const routes = {
   home: HOME,
@@ -61,7 +66,10 @@ const routes = {
     } else {
       return DELETE_VIDEO;
     }
-  }
+  },
+  github: GITHUB,
+  githubCallback: GITHUB_CALLBACK,
+  me: ME
 };
 
 export default routes;

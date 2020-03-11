@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import "./models/Video";
 import "./models/Comment";
+import "./models/User";
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,

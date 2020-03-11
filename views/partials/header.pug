@@ -14,7 +14,7 @@ header.header
                     <i class="fas fa-search"></i>
         .header__column
             ul
-                if !user.isAuthenticated
+                if !loggedUser
                     li
                         a(href=routes.join) 회원가입
                     li
@@ -24,7 +24,7 @@ header.header
                         a(href=`/videos${routes.upload}` aria-label="업로드")
                             i.fas.fa-file-upload
                     li
-                        a(href=routes.userDetail(user.id) aria-label="프로필")
+                        a(href=routes.me aria-label="프로필")
                             i.fas.fa-user-circle
                     li
                         a(href=routes.logout) 로그아웃

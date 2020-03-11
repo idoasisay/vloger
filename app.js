@@ -5,6 +5,10 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import passport from "passport";
+import mongoose from "mongoose";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 // for core-js v3:
 import "core-js";
 //default로 export를 하지 않으면 괄호를 써야 함. 그녀석만..
@@ -14,8 +18,11 @@ import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localMiddleWare, uploadVideoMiddleWare } from "./middleWares";
 
+import "./passport";
+
 //express 실행한 걸 변수 app에 담았음
 const app = express();
+const CookieStore = MongoStore(session);
 
 //정보 보안
 app.use(helmet());
@@ -31,6 +38,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //모든 일들을 로깅함
 app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new CookieStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(localMiddleWare);
 
