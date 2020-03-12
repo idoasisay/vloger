@@ -1,7 +1,10 @@
-
 extends layouts/main.pug
+
 block content
     .form-container
+        .record-container#jsRecordContainer
+            video#jsVideoPreview
+            button#jsRecordBtn 녹화하기
         form(action=`/videos${routes.upload}` method="post" enctype="multipart/form-data")
             label(for="file") 영상 파일
             input(type="file" id="file" name="videoFile" required=true accept="video/*")

@@ -9,7 +9,7 @@
     margin: 0 auto;
     padding: 8px 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1800px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -17,6 +17,7 @@
       width: 100%;
       &:nth-child(1) {
         width: 50%;
+        justify-content: flex-start;
       }
       &:nth-child(2) {
         width: 100%;

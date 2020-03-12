@@ -82,7 +82,8 @@ export const usersDetail = async (req, res) => {
     params: { id }
   } = req;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate("videos");
+    console.log(`유저: ${user.videos}`);
     res.render("usersDetail", { pageTitle: "유저 정보 | ", user });
   } catch (error) {
     res.redirect(routes.home);
