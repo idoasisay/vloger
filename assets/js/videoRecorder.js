@@ -3,16 +3,29 @@ const recordBtn = document.getElementById("jsRecordBtn");
 const videoPreview = document.getElementById("jsVideoPreview");
 
 let streamObject;
+let videoRecoder;
 
 const handleVideoData = event => {
-  console.log(event);
+  const { data: videoFile } = event;
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(videoFile);
+  link.download = "recorded.webm";
+  document.body.appendChild(link);
+  link.click();
 };
 
-const startRecording = stream => {
-  const videoRecoder = new MediaRecorder(streamObject);
+const stopRecording = () => {
+  videoRecoder.stop();
+  recordBtn.removeEventListener("click", stopRecording);
+  recordBtn.addEventListener("click", getVideo);
+  recordBtn.textContent = "녹화 시작하기";
+};
+
+const startRecording = () => {
+  videoRecoder = new MediaRecorder(streamObject);
   videoRecoder.start();
   videoRecoder.addEventListener("dataavailable", handleVideoData);
-  console.log(videoRecoder);
+  recordBtn.addEventListener("click", stopRecording);
 };
 
 const getVideo = async () => {

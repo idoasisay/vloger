@@ -17,6 +17,7 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import { localMiddleWare, uploadVideoMiddleWare } from "./middleWares";
+import apiRouter from "./routers/apiRouter";
 
 import "./passport";
 
@@ -59,6 +60,7 @@ app.use(localMiddleWare);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app;
 //누군가 내 파일을 불러올 때 app object를 주겠다는 의미임
